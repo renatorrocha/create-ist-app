@@ -10,35 +10,51 @@ const program = new Command();
 
 program
 	.version("1.0.0")
-	.description("CLI para clonar o projeto template")
+	.description("CLI para clonar projetos template do ISTEO.")
 	.option("-f, --front", "Frontend")
 	.option("-b", "--back", "Backend")
 	.action(async (options) => {
+		// todo: adicionar um texto de introdução com o chalk
+
 		const { repoChoice } = await inquirer.prompt([
 			{
 				type: "list",
 				name: "repoChoice",
-				message: "Escolha um repositório para clonar:",
-				choices: ["front", "back"],
+				message: "Escolha o tipo do repositório:",
+				choices: ["frontend", "backend"],
 			},
 		]);
 
-		const { projectName } = await inquirer.prompt([
+		const { projectInitials } = await inquirer.prompt([
 			{
 				type: "input",
-				name: "projectName",
-				message: "Digite o nome do projeto:",
+				name: "projectInitials",
+				message: "Digite a sigla do projeto:",
 				validate: (input) =>
-					input.length > 0 || "O nome do projeto não pode estar vazio.",
+					input.length > 0 || "A sigla do projeto não pode estar vazia.",
 			},
 		]);
+
+		const { sgtNumber } = await inquirer.prompt([
+			{
+				type: "input",
+				name: "sgtNumber",
+				message: "Digite o número do SGT:",
+				validate: (input) =>
+					/^[0-9]+$/.test(input) ||
+					"O número do SGT deve conter apenas dígitos.",
+			},
+		]);
+
+		// Formata o nome do projeto conforme especificado
+		const projectName = `${projectInitials}-${sgtNumber}-${repoChoice}`;
 
 		let repoUrl = "";
 
-		if (repoChoice === "front") {
-			repoUrl = "https://github.com/seu_usuario/repo-front.git";
-		} else if (repoChoice === "back") {
-			repoUrl = "https://github.com/seu_usuario/repo-back.git";
+		if (repoChoice === "frontend") {
+			repoUrl = "https://github.com/renatorrocha/vite-tanstack-tailwind.git";
+		} else if (repoChoice === "backend") {
+			repoUrl = "repo-back.git";
 		}
 
 		try {
