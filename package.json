@@ -1,16 +1,30 @@
 {
-  "name": "create-ist-app",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "commander": "^12.1.0",
-    "inquirer": "^12.0.1"
-  }
+    "name": "create-ist-app",
+    "version": "1.0.0",
+    "author": "@renatorrocha",
+    "description": "Uma cli para criar projetos usando um template padrão do IST",
+    "module": "index.ts",
+    "type": "module",
+    "bin": {
+        "create-ist-app": "./index.ts"
+    },
+    "scripts": {
+        "start": "bun run index.ts"
+    },
+    "keywords": [
+        "CLI",
+        "Bun",
+        "Typescript"
+    ],
+    "devDependencies": {
+        "@biomejs/biome": "1.9.4",
+        "@types/bun": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "commander": "^12.1.0",
+        "inquirer": "^12.0.1"
+    }
 }
