@@ -2,7 +2,10 @@
 
 import { Command } from "commander";
 import inquirer from "inquirer";
+import { promisify } from "node:util";
+import { exec } from "node:child_process";
 
+const execPromise = promisify(exec);
 const program = new Command();
 
 program
@@ -38,8 +41,18 @@ program
 			repoUrl = "https://github.com/seu_usuario/repo-back.git";
 		}
 
-		console.log(repoChoice);
-		console.log(projectName);
+		try {
+			console.log(
+				`Clonando o repositório ${repoChoice} para ${projectName}...`,
+			);
+			await execPromise(`git clone ${repoUrl} ${projectName}`);
+
+			console.log(
+				`Repositório ${repoChoice} clonado com sucesso em ${projectName}!`,
+			);
+		} catch (error) {
+			console.error("Erro ao clonar Repositório:", error);
+		}
 	});
 
 program.parse(process.argv);
