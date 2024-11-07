@@ -9,7 +9,7 @@
         "create-ist-app": "./index.ts"
     },
     "scripts": {
-        "start": "bun run index.ts"
+        "start": "bun run ./index.ts"
     },
     "keywords": [
         "CLI",
