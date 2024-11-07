@@ -24174,6 +24174,7 @@ program2.version("1.0.0").description("CLI para clonar projetos template do ISTE
   try {
     console.log(`Clonando o reposit\xF3rio ${repoChoice} para ${projectName}...`);
     await execPromise(`git clone ${repoUrl} ${projectName}`);
+    await execPromise(`rm -rf ${projectName}/.git`);
     console.log(`Reposit\xF3rio ${repoChoice} clonado com sucesso em ${projectName}!`);
   } catch (error) {
     console.error("Erro ao clonar Reposit\xF3rio:", error);

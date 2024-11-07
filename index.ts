@@ -46,7 +46,6 @@ program
 			},
 		]);
 
-		// Formata o nome do projeto conforme especificado
 		const projectName = `${projectInitials}-${sgtNumber}-${repoChoice}`;
 
 		let repoUrl = "";
@@ -62,6 +61,8 @@ program
 				`Clonando o repositório ${repoChoice} para ${projectName}...`,
 			);
 			await execPromise(`git clone ${repoUrl} ${projectName}`);
+
+			await execPromise(`rm -rf ${projectName}/.git`);
 
 			console.log(
 				`Repositório ${repoChoice} clonado com sucesso em ${projectName}!`,
